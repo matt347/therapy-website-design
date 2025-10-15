@@ -1,0 +1,18 @@
+body {
+  background-color: white;
+  color: #121212;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+section {
+  width: "640";
+  height: "674";
+  margin: 0 auto;
+  text-align: center;
+}
+
+header {
+  margin: 0 auto;
+  text-align: center;
+}
