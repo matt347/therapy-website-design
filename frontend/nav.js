@@ -12,6 +12,9 @@ nav_div.innerHTML = `
     <div>
         <a href="formpage.html">Reach Out</a>
     </div>
+    <div>
+        <a href="inquire.html">Inquire</a>
+    </div>
 </nav>`;
 }
 
