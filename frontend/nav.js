@@ -15,6 +15,9 @@ nav_div.innerHTML = `
     <div>
         <a href="inquire.html">Inquire</a>
     </div>
+    <div>
+        <a href="admin.html">Admin Page</a>
+    </div>
 </nav>`;
 }
 

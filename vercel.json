@@ -16,6 +16,18 @@
             "dest": "/backend/index.js"
         },
         {
+            "src": "/backend/admin/inquiries",
+            "dest": "/backend/index.js"
+        },
+        {
+            "src": "/backend/admin/login",
+            "dest": "/backend/index.js"
+        },
+        {
+            "src": "/backend/admin/logout",
+            "dest": "/backend/index.js"
+        },
+        {
             "src": "/(.*)",
             "dest": "/frontend/$1"
         }

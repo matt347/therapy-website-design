@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Therapist information and contact details" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Eliza Sparkes, LICSW</title>
+</head>
+
+<body>
+    <header>
+        <h1>Eliza Sparkes, LICSW</h1>
+        <h2>Information</h2>
+        <div id="nav_div"></div>
+
+        <script src="nav.js"></script>
+    </header>
+    <div>
+        <section>
+            <div id="loginForm" class="admin-login">
+                <h3>Admin Login</h3>
+                <input type="text" id="adminUsername" placeholder="Username" />
+                <input type="password" id="adminPassword" placeholder="Password" />
+                <button onclick="adminLogin()">Login</button>
+            </div>
+
+
+            <div id="inquiriesView" class="admin-inquiries" style="display: none;">
+                <h3>Client Inquiries</h3>
+                <button onclick="adminLogout()" class="logout-btn">Logout</button>
+                <div id="inquiriesList"></div>
+            </div>
+            <script src="admin.js"></script>
+        </section>
+
+
+
+    </div>
+    <div class="space-bottom"></div>
+</body>
+
+</html>
