@@ -237,6 +237,27 @@ iframe {
     background-color: #8bb596;
 }
 
+.inquiry-form button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.spinner {
+   border: 5px solid #f3f3f3;
+   border-top: 5px solid white;
+   border-radius: 50%;
+   width: 20px;
+   height: 20px;
+   animation: spin 0.8s linear infinite;
+   display: inline-block; 
+   vertical-align: middle;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 .response-area {
     margin-top: 20px;
     padding: 15px;

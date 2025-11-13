@@ -1,10 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('inquiryForm');
-    if (!form) return;
+    const submitButton = document.getElementById('submitButton')
+    if (!form || !submitButton) return;
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
+        const originalButtonText = submitButton.textContent;
+        submitButton.disabled = true;
+        submitButton.innerHTML = '<span class="spinner"></span>'
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData);
 
@@ -32,8 +36,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
             e.target.reset();
         } catch (error) {
+            submitButton.innerHTML = originalButtonText;
+            submitButton.disabled = false;
             console.error('Error details:', error);
             alert(`Error submitting inquiry: ${error.message}`);
+        } finally {
+            setTimeout(() => {
+                submitButton.innerHTML = originalButtonText;
+                submitButton.disabled = false;
+            }, 1500);
         }
     });
 });
