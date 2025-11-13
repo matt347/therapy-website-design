@@ -143,14 +143,14 @@ iframe {
 
 .issue-list {
     list-style: none;
-    counter-reset: item;
+    /* counter-reset: item; -> she doesn't want numbers */
     padding: 0;
     margin: 0;
     margin-left: 15px;
 }
 
 .issue-list li {
-    counter-increment: item;
+    /* counter-increment: item; -> she doesn't want numbers */
     display: flex;
     align-items: center;
     gap: 14px;
@@ -159,7 +159,7 @@ iframe {
 }
 
 .issue-list li::before {
-    content: counter(item);
+    content: ">"; /* replaced counter(item) with a >, will change if needed */
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -174,6 +174,7 @@ iframe {
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
 }
+
 .issue-list li:last-child::before {
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;
@@ -185,7 +186,7 @@ iframe {
 }
 
 .profile-image {
-    background-image: url("./images/profile.png");
+    background-image: url("./images/eliza.jpg");
     background-size: cover;
     background-position: center;
     width: 400px;

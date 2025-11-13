@@ -4,7 +4,7 @@ function navbar() {
 nav_div.innerHTML = `
 <nav>
     <div>
-        <a href="index.html">Home</a>
+        <a href="index.html">About</a>
     </div>
     <div>
         <a href="details.html">Pricing & FAQs</a>
@@ -14,6 +14,9 @@ nav_div.innerHTML = `
     </div>
     <div>
         <a href="inquire.html">Inquire</a>
+    </div>
+    <div>
+        <a href="admin.html">Admin Page</a>
     </div>
 </nav>`;
 }

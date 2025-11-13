@@ -1,9 +1,12 @@
 require('dotenv').config({ path: '../.env' });
-console.log('Environment check:', {
-  mongoDbUri: process.env.MONGODB_URI ? 'Set' : 'Not set',
-  openAiKey: process.env.OPENAI_API_KEY ? 'Set' : 'Not set'
-});
 const { MongoClient } = require('mongodb');
+
+const passport = require('./auth');
+const session = require('express-session'); 
+const bodyParser = require('body-parser'); 
+const parseJson = bodyParser.json();
+const jwt = require('jsonwebtoken');
+
 
 let cachedDb = null;
 
@@ -30,8 +33,6 @@ Impacts of political environment
 `;
 
 async function analyzeClientMatch(issuesText) {
-  const model = 'google/flan-t5-small';
-
   const prompt = `${THERAPIST_PROMPT}
 Client's presenting issues:
 ${issuesText}
@@ -68,24 +69,52 @@ Consider alignment with specialties, experience, and approach. Keep response und
 
   }
 }
-
-// Export the serverless function handler
 module.exports = async (req, res) => {
-  // Enable CORS
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
 
-  // Handle preflight requests
   if (req.method === 'OPTIONS') {
     res.setHeader('Access-Control-Allow-Methods', 'POST,OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     return res.status(200).end();
   }
-
-  if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method not allowed' });
+  if (!req.session) {
+    req.session = {};
   }
 
+  await new Promise((resolve, reject) => {
+    parseJson(req, res, (err) => {
+      if (err) return reject(err);
+      resolve();
+    });
+  });
+
+  if (req.method === 'POST') {
+
+
+    console.log('Received inquiry request:', req.url);
+    if (req.url === '/backend/inquire') {
+      return inquire(req, res);
+    }
+    else if (req.url === '/backend/admin/login') {
+      return adminLogin(req, res);
+    }
+    else if (req.url === '/backend/admin/logout')
+      return adminLogout(req, res);
+  }
+  else if (req.method === 'GET') {
+    if (req.url === '/backend/admin/status')
+      return checkAuthStatus(req, res);
+    else if (req.url === '/backend/admin/inquiries')
+      return fetchInquiries(req, res);
+  }
+  else {
+    return res.status(404).json({ message: 'Not Found' });
+  }
+};
+
+
+async function inquire(req, res) {
   try {
     const db = await connectToDatabase();
 
@@ -109,4 +138,57 @@ module.exports = async (req, res) => {
       error: error.message
     });
   }
-};
+}
+
+async function adminLogin(req, res) {
+  passport.authenticate('local', (err, user, info) => {
+    if (err) return res.status(500).json({ message: 'Login error' });
+    if (!user) return res.status(401).json({ message: info.message });
+    
+    const token = jwt.sign(
+      { id: user.id, username: user.username },
+      process.env.JWT_SECRET,
+      { expiresIn: '24h' }
+    );
+    
+    console.log('User logged in:', user.username);
+    return res.status(200).json({ 
+      message: 'Login successful',
+      token 
+    });
+  })(req, res);
+}
+
+async function checkAuthStatus(req, res) {
+  if (req.session.user) {
+    return res.status(200).json({ authenticated: true, user: req.session.user });
+  }
+  return res.status(200).json({ authenticated: false });
+}
+
+async function fetchInquiries(req, res) {
+  const token = req.headers.authorization?.split(' ')[1];
+  
+  if (!token) {
+    return res.status(401).json({ message: 'Unauthorized - no token provided' });
+  }
+
+  try {
+    jwt.verify(token, process.env.JWT_SECRET);
+  } catch (error) {
+    return res.status(401).json({ message: 'Unauthorized - invalid token' });
+  }
+
+  try {
+    const db = await connectToDatabase();
+    const inquiries = await db.collection('clients.client_data').find({}).toArray();
+    
+    return res.status(200).json(inquiries);
+  } catch (error) {
+    console.error('Error fetching inquiries:', error);
+    return res.status(500).json({
+      message: 'Error fetching inquiries',
+      error: error.message
+    });
+  }
+}
