@@ -10,7 +10,7 @@ nav_div.innerHTML = `
         <a href="details.html">Pricing & FAQs</a>
     </div>
     <div>
-        <a href="formpage.html">Reach Out</a>
+        <a href="formpage.html">Contact</a>
     </div>
 </nav>`;
 }
