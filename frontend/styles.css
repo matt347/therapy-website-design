@@ -318,6 +318,8 @@ img {
         font-size: 36px;
         height: auto;
         padding: 0 8px;
+        text-align: center;
+        display: block;
     }
 
     #nav_div nav {
@@ -344,9 +346,37 @@ img {
     }
 
     .profile-wrapper {
+        position: relative;
+        width: 100%;
+        max-width: 260px;
+        height: auto;
+        margin: 24px auto 0 auto;
+    }
+
+    .profile-image, .profile-offset-box {
         width: 100%;
         height: auto;
         aspect-ratio: 1 / 1;
+        border-radius: 12px;
+    }
+
+    .profile-offset-box {
+        top: -14px;
+        right: -8px;
+    }
+
+    .issue-list li {
+        white-space: normal;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .issue-list li::before {
+        font-size: 20px;
+        width: 28px;
+        height: 28px;
+        border-radius: 999px;
+        margin-top: 4px;
     }
 
     table tr {
