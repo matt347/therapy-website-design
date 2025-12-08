@@ -46,7 +46,7 @@ Consider alignment with specialties, experience, and approach. Keep response und
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      "model": "deepseek/deepseek-chat-v3.1:free",
+      "model": "amazon/nova-2-lite-v1:free",
       "messages": [
         {
           "role": "user",
@@ -99,8 +99,8 @@ module.exports = async (req, res) => {
     else if (req.url === '/backend/admin/login') {
       return adminLogin(req, res);
     }
-    else if (req.url === '/backend/admin/logout')
-      return adminLogout(req, res);
+    // else if (req.url === '/backend/admin/logout')
+    //   return adminLogout(req, res);
   }
   else if (req.method === 'GET') {
     if (req.url === '/backend/admin/status')
@@ -158,6 +158,11 @@ async function adminLogin(req, res) {
     });
   })(req, res);
 }
+
+// async function adminLogout(req, res) {
+//   req.session.user = null;
+//   return res.status(200).json({ message: 'Logged out successfully' });
+// }
 
 async function checkAuthStatus(req, res) {
   if (req.session.user) {
