@@ -9,8 +9,8 @@ In order to run this page, download the repo, and open the directory link in you
 
 
 Deployed on the github, as well as on vercel (where we will be developing backend parts) at:
-https://therapy-website-design-mtdeweeses-projects.vercel.app/
 
+https://therapy-website-design-mtdeweese-mtdeweeses-projects.vercel.app/
 
 
 
