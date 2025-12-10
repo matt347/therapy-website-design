@@ -16,8 +16,8 @@ In order to make changes to the website, download the repository!
 2. Image changing: Look through the images that are used on the website by finding the "images" folder
    and then locating the image you want to change with control + F
 3. Layout ordering changes: If you want to move a section of the website below another section, simply
-   grab the entire block starting and ending with "<section>" then move this section to the desired area,
-   and put it after any other "<section>" blocks you see if changing block is not going to become the
+   grab the entire block starting and ending with "section" then move this section to the desired area,
+   and put it after any other "section" blocks you see if changing block is not going to become the
    first block, otherwise before any other "<section>" blocks you see.
 4. See the changes you made on your website: to PUSH changes, you must use git commands or GitHub Desktop
    (much simpler) so that you can PUSH changes by either clicking the bottom on GitHub Desktop or typing
