@@ -18,7 +18,7 @@ In order to make changes to the website, download the repository!
 3. Layout ordering changes: If you want to move a section of the website below another section, simply
    grab the entire block starting and ending with "section" then move this section to the desired area,
    and put it after any other "section" blocks you see if changing block is not going to become the
-   first block, otherwise before any other "<section>" blocks you see.
+   first block, otherwise before any other "section" blocks you see.
 4. See the changes you made on your website: to PUSH changes, you must use git commands or GitHub Desktop
    (much simpler) so that you can PUSH changes by either clicking the bottom on GitHub Desktop or typing
    in the series of commands needed by terminal. After a few minutes, the changes will show up on your
